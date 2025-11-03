@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎄 Merry Carbon Footprint (No 404) 🎅</title>
+<style>
+/* ---------- 전체 배경: 그라디언트 + 별 + 눈 덮인 지면 (외부 이미지 없음) ---------- */
+:root{
+  --card-w:380px;
+  --accent1:#c21f1f;   /* 산타 레드 */
+  --accent2:#0a7b3b;   /* 크리스마스 그린 */
+  --gold:#ffd36b;
+  --glass: rgba(255,255,255,0.12);
+}
+*{box-sizing:border-box}
+body,html{height:100%;margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans KR',sans-serif}
+body{
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.06) 0, transparent 20%),
+    radial-gradient(ellipse at 90% 30%, rgba(255,255,255,0.03) 0, transparent 25%),
+    linear-gradient(180deg,#021428 0%, #082a4a 35%, #4b0b12 100%);
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+
+/* 상단 작은 장식 (간단한 별/트리 실루엣) */
+.header{
+  position:fixed; top:18px; left:18px; font-weight:700; letter-spacing:0.6px;
+  display:flex; gap:10px; align-items:center;
+}
+.logo-circle{
+  width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),#ff7b7b);
+  display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.4);
+}
+
+/* ---------- 카드 ---------- */
+.card {
+  width:var(--card-w);
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border-radius:18px; padding:20px; box-shadow:0 12px 30px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.06); backdrop-filter: blur(6px);
+  text-align:center;
+}
+
+/* 제목 */
+h1{margin:6px 0 10px 0;font-size:1.5rem}
+.subtitle{font-size:0.85rem;color:rgba(255,255,255,0.8);margin-bottom:12px}
+
+/* 입력 */
+.row{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:8px}
+label{font-size:0.95rem;color:var(--gold)}
+select,input{width:85%;padding:8px;border-radius:8px;border:none;background:rgba(0,0,0,0.15);color:#fff;font-size:0.95rem}
+
+/* 버튼 */
+.btn {
+  margin-top:12px;padding:10px 16px;border-radius:10px;border:none;
+  background:linear-gradient(90deg,var(--accent1),#ff995c); color:#fff;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,0,0,0.45);
+}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;box-shadow:none}
+
+/* 결과 */
+.result{margin-top:14px;font-size:1rem}
+.bar {height:12px;background:rgba(255,255,255,0.08);border-radius:10px;margin:12px auto;width:85%;overflow:hidden}
+.fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--gold));transition:width 900ms ease}
+
+/* 팁 박스 */
+.tipbox{margin-top:10px;background:rgba(255,255,255,0.03);padding:10px;border-radius:10px;color:#f7f7f7;font-size:0.9rem}
+
+/* ---------- 눈 애니메이션 (CSS만) ---------- */
+.snowflake{
+  position:fixed; top:-10px; width:8px; height:8px; background:white; border-radius:50%;
+  opacity:0.9; pointer-events:none; transform:translateY(0);
+  animation-name:fall, sway; animation-iteration-count:infinite;
+}
+@keyframes fall { to { transform: translateY(110vh); opacity:0.15 } }
+@keyframes sway { 0%{transform:translateX(0)}50%{transform:translateX(20px)}100%{transform:translateX(0)} }
+
+/* ---------- 화면 하단 눈 덮인 지면 (pure CSS) ---------- */
+.ground{
+  position:fixed; left:0; right:0; bottom:0; height:140px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.10));
+  clip-path: ellipse(80% 40% at 50% 80%);
+  opacity:0.9;
+  filter: blur(6px);
+}
+
+/* 반응형 */
+@media (max-width:420px){
+  :root{--card-w:320px}
+  .card{padding:16px}
+  h1{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-circle">C</div>
+    <div style="font-size:0.95rem">Merry Carbon • 햄!</div>
+  </div>
+
+  <div class="card" role="application" aria-label="탄소발자국 시뮬레이터 크리스마스 테마">
+    <h1>🎄 Merry Carbon Footprint 🎅</h1>
+    <div class="subtitle">외부 이미지 없이 안전한 크리스마스 배경</div>
+
+    <div class="row">
+      <label for="transport">🚗 교통수단</label>
+      <select id="transport" aria-label="교통수단">
+        <option value="2">버스 통학</option>
+        <option value="5">자가용(혼자)</option>
+        <option value="1">자전거/도보</option>
+      </select>
+
+      <label for="diet">🍔 식습관</label>
+      <select id="diet" aria-label="식습관">
+        <option value="4">육식 위주</option>
+        <option value="2">혼합형</option>
+        <option value="1">채식 위주</option>
+      </select>
+
+      <label for="elec">💡 전기 사용</label>
+      <select id="elec" aria-label="전기 사용">
+        <option value="5">높음 (장시간 사용)</option>
+        <option value="3">보통</option>
+        <option value="1">절약형</option>
+      </select>
+
+      <button class="btn" id="calcBtn">🎁 계산하기</button>
+      <button class="btn secondary" id="resetBtn" style="display:none">초기화</button>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">아래에서 옵션을 선택하고 계산하세요.</div>
+    <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+
+    <div class="tipbox" id="tips" aria-hidden="true"></div>
+  </div>
+
+  <!-- 눈 덮인 지면 -->
+  <div class="ground" aria-hidden="true"></div>
+
+<script>
+/* ---------- 눈송이 요소 생성 (무작위 위치/속도) ---------- */
+(function makeSnow(){
+  const count = 36;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('div');
+    s.className = 'snowflake';
+    const left = Math.random()*100;
+    const size = 4 + Math.random()*8; // px
+    const delay = Math.random()*-20;
+    const dur = 4 + Math.random()*6;
+    s.style.left = left + 'vw';
+    s.style.width = s.style.height = size + 'px';
+    s.style.borderRadius = (size/2)+'px';
+    s.style.animationDuration = dur + 's, ' + (2 + Math.random()*3) + 's';
+    s.style.animationDelay = delay + 's';
+    s.style.opacity = 0.6 + Math.random()*0.4;
+    document.body.appendChild(s);
+  }
+})();
+
+/* ---------- 계산 로직 (간단·교육용) ---------- */
+const calcBtn = document.getElementById('calcBtn');
+const resetBtn = document.getElementById('resetBtn');
+const resultEl = document.getElementById('result');
+const fillEl = document.getElementById('fill');
+const tipsEl = document.getElementById('tips');
+
+function calcScore(){
+  const t = Number(document.getElementById('transport').value) || 0;
+  const d = Number(document.getElementById('diet').value) || 0;
+  const e = Number(document.getElementById('elec').value) || 0;
+
+  // 단순 합산 점수 -> 일별 kg CO2 의사표현 (교육용 근사치)
+  const score = t + d + e; // 예: 3~12 범위
+  const dailyKg = Math.round(score * 1.2 * 10) / 10; // 근사 kg CO2/day
+  const annualKg = Math.round(dailyKg * 365);
+
+  // 바 채우기 (0..100%)
+  const pct = Math.min(100, Math.round((score / 12) * 100));
+  fillEl.style.width = pct + '%';
+
+  // 메시지
+  let msg = '';
+  if(score <= 5) msg = '🎄 지구가 환하게 웃어요! 작은 습관 유지해요.';
+  else if(score <= 8) msg = '🦌 조금 더 절약하면 큰 차이가 납니다.';
+  else msg = '🔥 산타도 놀랄 큰 배출! 한 가지 바꿔봅시다.';
+
+  resultEl.innerHTML = `<strong>예상 배출:</strong> ${dailyKg} kg CO₂ / day · 약 ${annualKg.toLocaleString()} kg / year<br>${msg}`;
+
+  // 팁 생성 (항목별)
+  const tips = [];
+  if(t >= 4) tips.push('통학: 대중교통·카풀·도보 전환을 고려해보세요.');
+  else tips.push('통학: 잘하고 있어요 — 가능한 도보/자전거 유지!');
+  if(d >= 3) tips.push('식습관: 주 1회 이상 채식 식단 시도해보세요.');
+  else tips.push('식습관: 균형 잡힌 식사로 환경과 건강 모두 챙겨요.');
+  if(e >= 4) tips.push('전기: 사용시간 줄이기·LED·절전모드 활용을 추천합니다.');
+
+  tipsEl.innerHTML = tips.map(x=>'• '+x).join('<br>');
+  tipsEl.style.display = 'block';
+
+  // show reset
+  resetBtn.style.display = 'inline-block';
+}
+
+/* 이벤트 바인딩 */
+calcBtn.addEventListener('click', calcScore);
+resetBtn.addEventListener('click', ()=>{
+  document.getElementById('transport').value = '2';
+  document.getElementById('diet').value = '2';
+  document.getElementById('elec').value = '3';
+  fillEl.style.width = '0%';
+  resultEl.textContent = '아래에서 옵션을 선택하고 계산하세요.';
+  tipsEl.innerHTML = '';
+  resetBtn.style.display = 'none';
+});
+</script>
+</body>
+</html>
